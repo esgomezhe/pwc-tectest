@@ -51,7 +51,17 @@ def analyze_pdf(
             detail="No se pudo extraer texto del PDF. Puede ser un documento escaneado sin OCR.",
         )
 
-    invoice_dict = analyze_invoice(text)
+    try:
+        invoice_dict = analyze_invoice(text)
+    except Exception as e:
+        error_msg = str(e)
+        if "429" in error_msg or "quota" in error_msg.lower():
+            raise HTTPException(
+                status_code=429,
+                detail="Cuota de Gemini API agotada. Intenta de nuevo en unos minutos.",
+            )
+        raise HTTPException(status_code=502, detail="Error al comunicarse con el servicio de IA.")
+
     invoice_dict = process_invoice_data(invoice_dict)
     invoice = save_invoice(db, x_session_id, file.filename, invoice_dict)
 

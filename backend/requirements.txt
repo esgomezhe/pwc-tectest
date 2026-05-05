@@ -6,3 +6,5 @@ python-dotenv==1.1.0
 google-generativeai==0.8.5
 python-multipart==0.0.20
 sqlalchemy==2.0.40
+pytest==8.3.4
+httpx==0.28.1

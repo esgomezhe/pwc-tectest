@@ -7,7 +7,7 @@ import google.generativeai as genai
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-model = genai.GenerativeModel(os.getenv("GEMINI_MODEL", "gemini-2.0-flash"))
+model = genai.GenerativeModel(os.getenv("GEMINI_MODEL"))
 
 PROMPT = """Analiza el siguiente texto extraído de un documento (factura, tiquete o similar) y devuelve un JSON con la siguiente estructura. Si un campo no aplica o no se encuentra, usa null.
 

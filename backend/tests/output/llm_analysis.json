@@ -1,0 +1,53 @@
+{
+  "archivo": "ad086050315901026178684401.pdf",
+  "etapa": "analisis_llm",
+  "modelo": "gemini-2.5-flash",
+  "resultado": {
+    "tipo_documento": "factura electrónica",
+    "numero_factura": "615822450",
+    "fecha_emision": "2026-12-04",
+    "fecha_vencimiento": "2026-12-04",
+    "emisor_nombre": "PASH S.A.S",
+    "emisor_nit": "860503159-1",
+    "emisor_direccion": "CL 164 21 48",
+    "emisor_ciudad": "Bogotá, D.c.",
+    "emisor_telefono": "2905466 Ext 8246",
+    "cliente_nombre": "MARIA ANGELICA DELOSRIOS POLANCO",
+    "cliente_documento": "1003808235",
+    "cliente_direccion": "CANIZALES",
+    "cliente_ciudad": "MANIZALES",
+    "cliente_telefono": "0000000000",
+    "cliente_email": "angelicadelosrios16@gmail.com",
+    "condicion_pago": "contado",
+    "medio_pago": "tarjeta crédito",
+    "moneda": "COP",
+    "subtotal": 60890.76,
+    "descuento": 90705.88,
+    "impuestos": 11569.24,
+    "total": 72460.0,
+    "cufe": "2e2f5cb9f69a8cc972918a92925125d466c19972993da51a58434cb2ba91a5b855e110548b4c7c31a5d7a24e453b2ee6",
+    "resolucion_dian": "No. 18764081830177",
+    "notas": "Garantia dias prendas de vestir:30 calzado:60 demas productos:15. Cambios prendas de vestir y calzado: 30 dias, deben estar sin uso y con etiquetas. No hay cambios en ropa interior,tapabocas-cosmeticos-bisuteria-marroquineria-accesorios-gafas-fragancias,productos marcados como \"Interior\", ni productos personalizados. Prendas en promocion: cambio solo por talla o color; por referencia: pagar excedente. Maximo 1 cambio por producto. No retracto en tienda fisica. Politicas: www.sevenseven.com",
+    "resumen": "Factura electrónica de venta de prendas de vestir y accesorios de Seven/Seven. Emitida a Maria Angelica Delosrios Polanco por PASH S.A.S y pagada con tarjeta de crédito.",
+    "items": [
+      {
+        "codigo": "281608824",
+        "descripcion": "JEAN CARGO TONO MEDIO OSCURO",
+        "cantidad": 1.0,
+        "unidad_medida": "UND",
+        "precio_unitario": 151176.0,
+        "descuento": 90705.88,
+        "subtotal": 60471.0
+      },
+      {
+        "codigo": "71380053UNI",
+        "descripcion": "VARIOS BOLSA SEVEN TELA MEDIANA NEGRA 40X36CM",
+        "cantidad": 1.0,
+        "unidad_medida": "UND",
+        "precio_unitario": 420.0,
+        "descuento": 0.0,
+        "subtotal": 420.0
+      }
+    ]
+  }
+}
