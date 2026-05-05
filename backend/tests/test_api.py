@@ -4,9 +4,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
-from database import Base, get_db
-import models
-from main import app
+from app.database import Base, get_db
+from app import models
+from app.main import app
 
 engine = create_engine(
     "sqlite:///:memory:",

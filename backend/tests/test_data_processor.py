@@ -1,7 +1,7 @@
 import json
 import os
 
-from data_processor import process_invoice_data
+from app.services.data_processor import process_invoice_data
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
 

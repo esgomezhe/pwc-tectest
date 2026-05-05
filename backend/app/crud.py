@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from models import Invoice, InvoiceItem
+from app.models import Invoice, InvoiceItem
 
 
 def save_invoice(db: Session, session_id: str, filename: str, invoice_dict: dict) -> Invoice:

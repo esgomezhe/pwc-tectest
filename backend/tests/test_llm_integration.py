@@ -3,7 +3,7 @@ import os
 
 import pytest
 
-from llm_service import analyze_invoice
+from app.services.llm_service import analyze_invoice
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
 

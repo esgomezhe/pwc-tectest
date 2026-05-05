@@ -5,8 +5,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
-from database import Base
-from crud import save_invoice, get_invoices_by_session, get_invoice_by_id
+from app.database import Base
+from app.crud import save_invoice, get_invoices_by_session, get_invoice_by_id
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
 

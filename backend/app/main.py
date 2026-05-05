@@ -5,13 +5,12 @@ from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from crud import get_invoice_by_id, get_invoices_by_session, save_invoice
-from data_processor import process_invoice_data
-from database import Base, engine, get_db
-from llm_service import analyze_invoice
-from models import Invoice, InvoiceItem
-from pdf_extractor import extract_text_from_pdf
-from schemas import InvoiceListItem, InvoiceOut
+from app.crud import get_invoice_by_id, get_invoices_by_session, save_invoice
+from app.database import Base, engine, get_db
+from app.schemas import InvoiceListItem, InvoiceOut
+from app.services.data_processor import process_invoice_data
+from app.services.llm_service import analyze_invoice
+from app.services.pdf_extractor import extract_text_from_pdf
 
 load_dotenv()
 
@@ -19,9 +18,13 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Invoice Analyzer", version="1.0.0")
 
+cors_origins = [
+    os.getenv("CORS_ORIGIN")
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv("CORS_ORIGIN")],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

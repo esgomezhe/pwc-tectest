@@ -1,7 +1,7 @@
 import json
 import os
 
-from pdf_extractor import extract_text_from_pdf
+from app.services.pdf_extractor import extract_text_from_pdf
 
 EXAMPLES_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "examples")
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
