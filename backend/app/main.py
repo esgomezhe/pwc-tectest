@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.crud import get_invoice_by_id, get_invoices_by_session, save_invoice
 from app.database import Base, engine, get_db
+from app.models import Invoice
 from app.schemas import InvoiceListItem, InvoiceOut
 from app.services.data_processor import process_invoice_data
 from app.services.llm_service import analyze_invoice
@@ -15,6 +16,61 @@ from app.services.pdf_extractor import extract_text_from_pdf
 load_dotenv()
 
 Base.metadata.create_all(bind=engine)
+
+
+def build_invoice_response(invoice: Invoice) -> dict:
+    items_data = [
+        {
+            "id": item.id,
+            "codigo": item.codigo,
+            "descripcion": item.descripcion,
+            "cantidad": item.cantidad,
+            "unidad_medida": item.unidad_medida,
+            "precio_unitario": item.precio_unitario,
+            "descuento": item.descuento,
+            "subtotal": item.subtotal,
+        }
+        for item in invoice.items
+    ]
+
+    enriched = process_invoice_data({"items": items_data})
+
+    response = {
+        "id": invoice.id,
+        "session_id": invoice.session_id,
+        "nombre_archivo": invoice.nombre_archivo,
+        "tipo_documento": invoice.tipo_documento,
+        "numero_factura": invoice.numero_factura,
+        "fecha_emision": invoice.fecha_emision,
+        "fecha_vencimiento": invoice.fecha_vencimiento,
+        "emisor_nombre": invoice.emisor_nombre,
+        "emisor_nit": invoice.emisor_nit,
+        "emisor_direccion": invoice.emisor_direccion,
+        "emisor_ciudad": invoice.emisor_ciudad,
+        "emisor_telefono": invoice.emisor_telefono,
+        "cliente_nombre": invoice.cliente_nombre,
+        "cliente_documento": invoice.cliente_documento,
+        "cliente_direccion": invoice.cliente_direccion,
+        "cliente_ciudad": invoice.cliente_ciudad,
+        "cliente_telefono": invoice.cliente_telefono,
+        "cliente_email": invoice.cliente_email,
+        "condicion_pago": invoice.condicion_pago,
+        "medio_pago": invoice.medio_pago,
+        "moneda": invoice.moneda,
+        "subtotal": invoice.subtotal,
+        "descuento": invoice.descuento,
+        "impuestos": invoice.impuestos,
+        "total": invoice.total,
+        "cufe": invoice.cufe,
+        "resolucion_dian": invoice.resolucion_dian,
+        "notas": invoice.notas,
+        "resumen": invoice.resumen,
+        "created_at": invoice.created_at,
+        "items": enriched["items"],
+        "estadisticas": enriched.get("estadisticas"),
+    }
+
+    return response
 
 app = FastAPI(title="Invoice Analyzer", version="1.0.0")
 
@@ -68,7 +124,7 @@ def analyze_pdf(
     invoice_dict = process_invoice_data(invoice_dict)
     invoice = save_invoice(db, x_session_id, file.filename, invoice_dict)
 
-    return invoice
+    return build_invoice_response(invoice)
 
 
 @app.get("/invoices", response_model=list[InvoiceListItem])
@@ -88,4 +144,4 @@ def get_invoice(
     invoice = get_invoice_by_id(db, invoice_id, x_session_id)
     if not invoice:
         raise HTTPException(status_code=404, detail="Factura no encontrada")
-    return invoice
+    return build_invoice_response(invoice)

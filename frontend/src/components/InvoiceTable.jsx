@@ -30,6 +30,9 @@ export default function InvoiceTable({ items, subtotal }) {
             <th className="px-4 py-3 text-right text-xs font-semibold text-gray-400 uppercase tracking-wide">
               Subtotal
             </th>
+            <th className="px-4 py-3 text-right text-xs font-semibold text-gray-400 uppercase tracking-wide">
+              Participación
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-800">
@@ -43,15 +46,20 @@ export default function InvoiceTable({ items, subtotal }) {
                 ${formatCurrency(item.precio_unitario)}
               </td>
               <td className="px-4 py-3 text-right text-red-400 font-semibold">
-                {item.descuento > 0 ? `-$${formatCurrency(item.descuento)}` : "—"}
+                {item.descuento > 0
+                  ? `-$${formatCurrency(item.descuento)} (${item.descuento_porcentual}%)`
+                  : "—"}
               </td>
               <td className="px-4 py-3 text-right text-white font-bold">
                 ${formatCurrency(item.subtotal)}
               </td>
+              <td className="px-4 py-3 text-right text-blue-400 font-semibold">
+                {item.participacion != null ? `${item.participacion}%` : "—"}
+              </td>
             </tr>
           ))}
           <tr className="bg-gray-900/50 border-t-2 border-gray-700">
-            <td colSpan="4" className="px-4 py-4 text-right font-semibold text-gray-300">
+            <td colSpan="5" className="px-4 py-4 text-right font-semibold text-gray-300">
               Total:
             </td>
             <td className="px-4 py-4 text-right font-bold text-lg text-blue-400">

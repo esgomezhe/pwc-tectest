@@ -2,6 +2,7 @@ import { useState } from "react";
 import UploadArea from "./components/UploadArea";
 import InvoiceSummary from "./components/InvoiceSummary";
 import InvoiceTable from "./components/InvoiceTable";
+import InvoiceStats from "./components/InvoiceStats";
 import InvoiceHistory from "./components/InvoiceHistory";
 
 export default function App() {
@@ -63,6 +64,12 @@ export default function App() {
                 <div className="bg-gray-950 border border-gray-800 rounded-lg p-8 shadow-lg">
                   <h2 className="text-xl font-semibold mb-6">Artículos</h2>
                   <InvoiceTable items={invoiceData.items} subtotal={invoiceData.total} />
+                </div>
+
+                {/* Statistics from Pandas */}
+                <div className="bg-gray-950 border border-gray-800 rounded-lg p-8 shadow-lg">
+                  <h2 className="text-xl font-semibold mb-6">Análisis Estadístico</h2>
+                  <InvoiceStats estadisticas={invoiceData.estadisticas} />
                 </div>
               </>
             )}

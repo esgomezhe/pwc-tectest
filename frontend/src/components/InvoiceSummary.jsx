@@ -84,11 +84,45 @@ export default function InvoiceSummary({ invoice }) {
         </div>
       </div>
 
+      {/* Payment Info */}
+      {(invoice.condicion_pago || invoice.medio_pago) && (
+        <div className="grid grid-cols-2 gap-4">
+          {invoice.condicion_pago && (
+            <div className="bg-gray-900 border border-gray-800 p-4 rounded-lg">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Condición de Pago</p>
+              <p className="text-white font-semibold mt-2">{invoice.condicion_pago}</p>
+            </div>
+          )}
+          {invoice.medio_pago && (
+            <div className="bg-gray-900 border border-gray-800 p-4 rounded-lg">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Medio de Pago</p>
+              <p className="text-white font-semibold mt-2">{invoice.medio_pago}</p>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Summary */}
       <div className="bg-gray-900 border border-gray-800 p-4 rounded-lg">
         <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Resumen</p>
         <p className="text-gray-300 text-sm leading-relaxed">{invoice.resumen}</p>
       </div>
+
+      {/* Notes */}
+      {invoice.notas && (
+        <div className="bg-gray-900 border border-gray-800 p-4 rounded-lg">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Notas</p>
+          <p className="text-gray-300 text-sm leading-relaxed">{invoice.notas}</p>
+        </div>
+      )}
+
+      {/* DIAN Resolution */}
+      {invoice.resolucion_dian && (
+        <div className="bg-gray-900 border border-gray-800 p-4 rounded-lg">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Resolución DIAN</p>
+          <p className="text-gray-300 text-sm">{invoice.resolucion_dian}</p>
+        </div>
+      )}
 
       {/* CUFE if present */}
       {invoice.cufe && (
